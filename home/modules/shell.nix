@@ -162,6 +162,8 @@
     enableZshIntegration = true;
   };
   home.packages = with pkgs; [
+    claude-code
+    nix-search-cli
     tree
     fd
     fzf
@@ -173,5 +175,6 @@
     yazi # 终端备用
     eza
     copilot-cli
+    awscli2
   ];
 }
