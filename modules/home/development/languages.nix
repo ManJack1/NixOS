@@ -7,7 +7,8 @@
     rustc
 
     # C/C++
-    clang
+    gcc
+    clang-tools
     cmake
     lldb
 

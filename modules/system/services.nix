@@ -6,7 +6,8 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-session --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
+        command =
+          "${pkgs.tuigreet}/bin/tuigreet --time --asterisks --remember --remember-session --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
       };
     };
   };
@@ -31,11 +32,7 @@
     keyboards = {
       default = {
         ids = [ "*" ];
-        settings = {
-          main = {
-            capslock = "f13";
-          };
-        };
+        settings = { main = { capslock = "leftcontrol"; }; };
       };
     };
   };

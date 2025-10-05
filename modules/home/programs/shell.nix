@@ -1,18 +1,21 @@
 { config, pkgs, ... }:
 
 {
+
+  programs.starship = { enable = true; };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    initContent = "source ~/.p10k.zsh";
+    # initContent = "source ~/.p10k.zsh";
 
-    plugins = [{
-      name = "powerlevel10k";
-      src = pkgs.zsh-powerlevel10k;
-      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    }];
+    # plugins = [{
+    #   name = "powerlevel10k";
+    #   src = pkgs.zsh-powerlevel10k;
+    #   file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    # }];
 
     oh-my-zsh = {
       enable = true;
