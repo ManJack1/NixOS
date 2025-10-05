@@ -1,14 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  programs.neovim = {
-    defaultEditor = true;
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
-  # Git 配置
   programs.git = {
     enable = true;
     userName = "Manjack";
@@ -19,4 +11,10 @@
     };
   };
 
+  programs.lazygit.enable = true;
+
+  home.packages = with pkgs; [
+    git
+    lazygit
+  ];
 }

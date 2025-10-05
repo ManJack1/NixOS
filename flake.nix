@@ -22,7 +22,7 @@
     nixosConfigurations.manjack = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./hosts/manjack/configuration.nix
+        ./hosts/manjack/default.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -30,7 +30,7 @@
           home-manager.users.manjack = import ./home/home.nix;
           home-manager.extraSpecialArgs = {
             inherit inputs;
-          }; # 传递给 Home Manager
+          };
         }
       ];
     };
