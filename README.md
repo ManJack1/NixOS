@@ -1,193 +1,149 @@
-# 🏠 Manjack's NixOS Dotfiles
+# 🏠 Manjack's NixOS Configuration
 
-A personal system configuration based on NixOS Flakes and Home Manager.
-
-A declarative NixOS configuration using Flakes and Home Manager for a complete desktop environment.
+A modular, declarative NixOS configuration using Flakes and Home Manager.
 
 ## ✨ Features
 
-- 🎯 **Fully Declarative Configuration** - Complete system reproducibility with NixOS Flakes
-- 🏡 **Home Manager Integration** - User-level configuration management
-- 🪟 **Dual Window Managers** - Niri (dynamic) and Sway (tiling)
-- 🌏 **Chinese Localization** - Full Chinese support + Fcitx5 input method
-- 🎨 **Fine-tuned** - Bluetooth, power management, keyboard remapping, etc.
-- 🛠️ **Development Environment** - Multi-language toolchains included
-- 🎭 **Modern Shell** - Zsh + Powerlevel10k + Tmux
+- 🎯 **Modular Architecture** - Clean separation of system and home configurations
+- 🏡 **Home Manager** - Declarative user environment management
+- 🪟 **Niri Window Manager** - Dynamic scrollable tiling with Wayland
+- 🌏 **Chinese Support** - Complete i18n with Fcitx5 + Rime input
+- 🎨 **Modern Desktop** - Rofi launcher, Waybar, custom theming
+- 🛠️ **Developer Ready** - Multi-language toolchains and LSP support
+- ⚡ **Performance Tuned** - TLP power management, PipeWire audio
 
-## 📁 Directory Structure
+## 📁 Structure
 
 ```
 .
-├── flake.nix                  # Flake entry point
+├── flake.nix                     # Flake entry point
 ├── hosts/
 │   └── manjack/
-│       ├── configuration.nix  # System configuration
+│       ├── default.nix           # Host configuration
 │       └── hardware-configuration.nix
+├── modules/
+│   ├── system/                   # System-level modules
+│   │   ├── boot.nix
+│   │   ├── locale.nix
+│   │   ├── fonts.nix
+│   │   ├── input-method.nix
+│   │   ├── hardware.nix
+│   │   └── services.nix
+│   └── home/                     # Home Manager modules
+│       ├── programs/
+│       │   ├── shell.nix         # Zsh, Tmux
+│       │   ├── terminal.nix      # Kitty, Alacritty
+│       │   ├── editor.nix        # Neovim
+│       │   └── git.nix
+│       ├── desktop/
+│       │   ├── wayland.nix       # Niri, Sway, Rofi
+│       │   └── apps.nix          # Desktop applications
+│       └── development/
+│           ├── languages.nix     # Programming languages
+│           └── tools.nix         # Dev utilities
 ├── home/
-│   ├── home.nix              # Home Manager main config
-│   └── modules/
-│       ├── shell.nix         # Shell config (Zsh, Tmux)
-│       ├── editor.nix        # Editor config (Neovim, Git)
-│       ├── desktop.nix       # Desktop environment & apps
-│       └── dev.nix           # Dev tools & languages
-└── config/
-    ├── kitty/                # Kitty terminal config
-    ├── niri/                 # Niri WM config
-    ├── sway/                 # Sway WM config
-    ├── tmux/                 # Tmux config
-    ├── rofi/                 # Rofi launcher config
-    └── zsh/                  # Zsh config files
+│   └── home.nix                  # Home Manager entry
+└── config/                       # Application configs
+    ├── kitty/
+    ├── niri/
+    ├── tmux/
+    ├── rofi/
+    └── zsh/
 ```
 
-## 🚀 Quick Start
+## 🚀 Installation
 
 ### Prerequisites
 
-- NixOS system
-- Flakes support enabled
+- NixOS installed
+- Flakes enabled in `/etc/nixos/configuration.nix`:
+  ```nix
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  ```
 
-### Installation
+### Deploy
 
 ```bash
-# Clone the repo
+# Clone repository
 git clone https://github.com/yourusername/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
-# First install (edit hostname and user info)
+# Customize hostname and username in flake.nix, home/home.nix, and hosts/manjack/default.nix
+
+# Apply configuration
 sudo nixos-rebuild switch --flake .#manjack
 
-# Update later
+# Future updates
 sudo nixos-rebuild switch --flake ~/.dotfiles
-# Or use alias
-update
+# Or use alias: update
 ```
 
-## ⚙️ Configuration Details
+## ⚙️ Configuration
 
-### System Configuration
+### System
 
 **Localization**
 - Timezone: Asia/Shanghai
-- System language: en_US.UTF-8
+- System: en_US.UTF-8
 - Locale: zh_CN.UTF-8
-- Input method: Fcitx5 + Rime
+- Input: Fcitx5 + Rime
 
 **Fonts**
-- Western: Noto Fonts, Fira Code, JetBrains Mono
-- Chinese: Source Han Sans/Serif, Noto CJK, LXGW WenKai, Maple Mono
+- Code: Fira Code, JetBrains Mono, Maple Mono (Nerd Fonts)
+- CJK: Source Han Sans/Serif, Noto CJK, LXGW WenKai
 - Emoji: Noto Color Emoji
-- Nerd Fonts: JetBrains Mono, Fira Code
 
-**Hardware & Services**
-- Bluetooth support (auto start)
-- Power management (TLP)
-- Audio service (PipeWire)
-- Keyboard remap (CapsLock → F13)
-- Login manager (TuiGreet)
+**Services**
+- Audio: PipeWire
+- Bluetooth: enabled by default
+- Power: TLP
+- Display: TuiGreet login manager
+- Keyboard: CapsLock → F13
 
-### Home Manager Modules
+### Home Manager
 
-#### Shell (shell.nix)
+**Shell** (`shell.nix`)
+- Zsh + Oh-My-Zsh + Powerlevel10k
+- Plugins: autosuggestions, syntax-highlighting
+- Tools: fzf, zoxide, eza, ripgrep, fd, bat
+- Tmux with Tokyo Night theme
 
-**Zsh**
-- Plugin manager: Oh-My-Zsh
-- Theme: Powerlevel10k
-- Enabled: autosuggestions, syntax highlighting, completion
-- Integrated tools: fzf, zoxide
+**Terminal** (`terminal.nix`)
+- Kitty (primary)
+- Alacritty (backup)
+- Yazi file manager
 
-**Tmux**
-- Prefix key: `Ctrl-a`
-- Theme: Tokyo Night
-- Plugins: sensible, vim-tmux-navigator
-- See shortcuts below
+**Editor** (`editor.nix`)
+- Neovim with custom config
 
-**Included Tools**
-- Terminal: Kitty, Alacritty, Yazi
-- CLI tools: eza, fd, ripgrep, lazygit, claude-code
-- System tools: tree, fastfetch, awscli2
+**Desktop** (`wayland.nix`, `apps.nix`)
+- WM: Niri (dynamic), Sway (tiling)
+- Launcher: Rofi
+- Bar: Waybar
+- Apps: Firefox, Chrome, Spotify, Discord, Thunar
+- Screenshots: Grim + Slurp
 
-#### Editor (editor.nix)
+**Development** (`languages.nix`, `tools.nix`)
+- Languages: Rust, C/C++, Python, Go, Ruby, PHP, Java, Julia, Lua
+- LSP: clangd, rust-analyzer, taplo
+- Tools: lazygit, claude-code, tree-sitter
+- Docs: tectonic, graphviz, mermaid
 
-- Neovim (default editor)
-- Git config
-  - User: Manjack
-  - Email: manjack0910@gmail.com
-  - Default branch: main
-
-#### Desktop (desktop.nix)
-
-**Window Managers & Desktop Tools**
-- Niri (dynamic tiling)
-- Sway (classic tiling)
-- Rofi (app launcher)
-- Waybar (optional status bar)
-
-**Applications**
-- Browser: Firefox, Google Chrome
-- File manager: Thunar (main)
-- Entertainment: Spotify, Discord
-- Screenshot: Grim + Slurp
-- System: Brightnessctl, Playerctl, Pavucontrol
-
-#### Dev (dev.nix)
-
-**Languages**
-- Rust (cargo)
-- C/C++ (clang, cmake, lldb)
-- Python (python3, pip)
-- Go, Ruby, PHP, Java, Julia, Lua
-
-**Dev Tools**
-- LSP: shellcheck, taplo, tree-sitter
-- Docs: Tectonic (LaTeX), Graphviz, Mermaid
-- VCS: Git, Lazygit
-
-## 🎨 Customization
-
-### Change Hostname & User
-
-1. Edit `flake.nix`:
-```nix
-nixosConfigurations.YOUR_HOSTNAME = nixpkgs.lib.nixosSystem {
-  # ...
-  home-manager.users.YOUR_USERNAME = import ./home/home.nix;
-}
-```
-
-2. Edit `home/home.nix`:
-```nix
-home.username = "YOUR_USERNAME";
-home.homeDirectory = "/home/YOUR_USERNAME";
-```
-
-3. Edit `hosts/manjack/configuration.nix`:
-```nix
-networking.hostName = "YOUR_HOSTNAME";
-users.users.YOUR_USERNAME = {
-  # ...
-};
-```
-
-### Add/Remove Packages
-
-- System packages: Edit `environment.systemPackages` in `hosts/manjack/configuration.nix`
-- User packages: Edit the relevant `home/modules/*.nix` file
-
-## ⌨️ Keyboard Shortcuts
+## ⌨️ Keybindings
 
 ### Tmux
 
-| Shortcut | Function |
-|----------|----------|
-| `Ctrl-a` | Prefix key |
-| `Alt-w`  | New window |
-| `Alt-v`  | Vertical split |
-| `Alt-c`  | Horizontal split |
-| `Alt-,` / `Alt-.` | Switch window |
-| `Alt-1~9` | Jump to window 1-9 |
+| Key | Action |
+|-----|--------|
+| `Ctrl-a` | Prefix |
+| `Alt-w` | New window |
+| `Alt-v` | Vertical split |
+| `Alt-c` | Horizontal split |
+| `Alt-,` / `Alt-.` | Previous/next window |
+| `Alt-1~9` | Switch to window 1-9 |
 | `Alt-h/j/k/l` | Resize pane |
-| `Alt-q`  | Close pane |
-| `Ctrl-h/j/k/l` | Vim-style pane navigation |
+| `Alt-q` | Close pane |
+| `Ctrl-h/j/k/l` | Navigate panes (vim-style) |
 | `Prefix r` | Reload config |
 
 ### Shell Aliases
@@ -203,34 +159,46 @@ lg     # lazygit
 update # sudo nixos-rebuild switch --flake ~/.dotfiles
 ```
 
+## 🔧 Customization
+
+### Change Hostname/Username
+
+1. **flake.nix** - Update `nixosConfigurations.YOUR_HOST` and `home-manager.users.YOUR_USER`
+2. **home/home.nix** - Set `home.username` and `home.homeDirectory`
+3. **hosts/manjack/default.nix** - Change `networking.hostName` and `users.users.YOUR_USER`
+
+### Add Packages
+
+- **System packages**: Edit module files in `modules/system/`
+- **User packages**: Edit module files in `modules/home/`
+
+### Modify Configs
+
+Application configs are in `config/` and can be edited directly.
+
 ## 🛠️ Tech Stack
 
-- **OS**: NixOS (Unstable)
-- **Package Manager**: Nix Flakes
-- **User Config**: Home Manager
-- **Window Manager**: Niri / Sway (Wayland)
+- **OS**: NixOS Unstable (25.05)
+- **Config Management**: Nix Flakes + Home Manager
+- **Window Manager**: Niri (Wayland)
 - **Terminal**: Kitty
-- **Shell**: Zsh + Oh-My-Zsh + Powerlevel10k
-- **Terminal Multiplexer**: Tmux
+- **Shell**: Zsh + Powerlevel10k
+- **Multiplexer**: Tmux
 - **Editor**: Neovim
 - **Input Method**: Fcitx5 + Rime
 - **Theme**: Tokyo Night
 
 ## 📝 Notes
 
-- This config uses NixOS 25.05 (Unstable)
-- Experimental features required: `nix-command` and `flakes`
-- Home Manager uses `.backup` extension for conflict backups
-- Tmux plugins managed by TPM; press `Prefix + I` to install plugins on first use
-
-## 🤝 Contributing
-
-Feel free to submit issues and pull requests!
+- Requires NixOS 24.05+ with flakes enabled
+- Home Manager backup extension: `.backup`
+- Tmux plugins managed by TPM; install with `Prefix + I` on first run
+- Niri window manager requires Wayland support
 
 ## 📄 License
 
-MIT License
+MIT
 
 ---
 
-⭐ If you find this helpful, please give it a star!
+⭐ Star this repo if you find it useful!
