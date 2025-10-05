@@ -1,0 +1,266 @@
+# Sway 配置文件
+# ~/.config/sway/config
+
+# ============================================
+# 变量定义
+# ============================================
+set $mod Mod4
+set $alt Mod1
+set $terminal kitty
+set $menu wofi --show drun
+
+# ============================================
+# 输出配置(显示器)
+# ============================================
+# output * bg ~/.config/wallpaper.png fill
+output eDP-1 disable
+
+# DP-1 - 外接三星显示器2
+output DP-1 {
+    mode 2560x1440@60.000000Hz
+    position 0,0
+    scale 1.0
+}
+
+# HDMI-A-1 - 外接三星显示器1
+output HDMI-A-1 {
+    mode 2560x1440@60.000000Hz
+    position 2560,0
+    scale 1.0
+    transform 270
+}
+
+
+
+# ============================================
+# 输入设备配置
+# ============================================
+# 设置键盘布局（英文+中文）
+# 键盘布局（英文+中文）
+input * {
+  xkb_layout "us,cn"
+}
+
+# 自动启动 Fcitx5
+exec_always fcitx5 -d --replace
+exec snixembed
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+# ============================================
+# 外观设置
+# ============================================
+# 窗口边框
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders none
+
+# Tokyo Night 主题颜色
+# class                 border  backgr. text    indicator child_border
+client.focused          #7aa2f7 #7aa2f7 #1a1b26 #7aa2f7   #7aa2f7
+client.focused_inactive #414868 #414868 #c0caf5 #414868   #414868
+client.unfocused        #1a1b26 #1a1b26 #545c7e #1a1b26   #1a1b26
+client.urgent           #f7768e #f7768e #1a1b26 #f7768e   #f7768e
+
+# Gaps
+gaps inner 10
+gaps outer 5
+
+# 字体
+font pango:JetBrainsMono Nerd Font 11
+
+# ============================================
+# 基础应用启动
+# ============================================
+bindsym $mod+Return exec $terminal
+bindsym $mod+b exec firefox
+# bindsym $mod+v exec neovide
+bindsym $mod+e exec thunar
+bindsym $mod+space exec rofi -show run
+bindsym $mod+Tab exec rofi -show window
+
+# ============================================
+# 窗口管理
+# ============================================
+bindsym $mod+q kill
+bindsym $mod+m fullscreen toggle
+bindsym $mod+f floating toggle
+bindsym $mod+Shift+space focus mode_toggle
+bindsym $mod+r layout toggle split
+
+# ============================================
+# 窗口组管理(标签/堆叠)
+# ============================================
+bindsym $mod+t layout tabbed
+
+# Tab 切换
+# bindsym $mod+Tab focus next
+# bindsym $mod+Shift+Tab focus prev
+
+
+bindsym $mod+c split horizontal
+bindsym $mod+v split vertical
+# ============================================
+# 焦点移动 (Vim 风格)
+# ============================================
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# ============================================
+# 移动窗口 (Vim 风格)
+# ============================================
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# ============================================
+# 调整窗口大小 (Super + Alt + hjkl)
+# ============================================
+bindsym $mod+$alt+h resize shrink width 10 px
+bindsym $mod+$alt+j resize grow height 10 px
+bindsym $mod+$alt+k resize shrink height 10 px
+bindsym $mod+$alt+l resize grow width 10 px
+
+# ============================================
+# 工作区切换
+# ============================================
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# ============================================
+# 移动窗口到工作区
+# ============================================
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# ============================================
+# 暂存区 (Scratchpad)
+# ============================================
+bindsym $mod+s scratchpad show
+bindsym $mod+Shift+s move scratchpad
+
+# ============================================
+# 鼠标操作
+# ============================================
+# 拖动窗口 - Super + 左键拖动，Super + 右键调整大小
+floating_modifier $mod normal
+
+# 鼠标滚轮切换工作区
+bindsym --whole-window $mod+button4 workspace prev
+bindsym --whole-window $mod+button5 workspace next
+
+# ============================================
+# 截图 - 微信风格
+# ============================================
+# Alt + Shift + A - 区域截图到剪贴板(微信风格)
+bindsym $alt+Shift+a exec grim -g "$(slurp)" - | wl-copy && notify-send "截图" "已复制到剪贴板"
+
+# Alt + Shift + S - 区域截图并保存
+bindsym $alt+Shift+s exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send "截图已保存"
+
+# Alt + Shift + W - 窗口截图到剪贴板
+bindsym $alt+Shift+w exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy && notify-send "窗口截图" "已复制到剪贴板"
+
+# Alt + Shift + F - 全屏截图到剪贴板
+bindsym $alt+Shift+f exec grim - | wl-copy && notify-send "全屏截图" "已复制到剪贴板"
+
+# Print - 快速区域截图
+bindsym Print exec grim -g "$(slurp)" - | wl-copy && notify-send "区域截图" "已复制到剪贴板"
+
+# Shift + Print - 全屏截图
+bindsym Shift+Print exec grim - | wl-copy && notify-send "全屏截图" "已复制到剪贴板"
+
+# Ctrl + Print - 区域截图保存
+bindsym Control+Print exec grim -g "$(slurp)" ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send "区域截图已保存"
+
+# ============================================
+# 音量控制
+# ============================================
+bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+# ============================================
+# 亮度控制
+# ============================================
+bindsym XF86MonBrightnessUp exec brightnessctl -e4 -n2 set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl -e4 -n2 set 5%-
+
+# ============================================
+# 媒体控制
+# ============================================
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+
+# ============================================
+# 系统控制
+# ============================================
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m "退出 Sway?" -B "是" "swaymsg exit"
+
+# ===========================================k
+# 状态栏
+# ============================================
+# ~/.config/sway/config
+bar {
+    position top
+    height 30
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+    
+    # 关键:不要有 tray_output none
+    tray_output * 
+    icon_theme Papirus-Dark
+    
+    font pango:JetBrainsMono Nerd Font, LXGW WenKai Mono 11
+    
+    colors {
+        background #1a1b26
+        statusline #c0caf5
+        separator #414868
+        focused_workspace  #7aa2f7 #7aa2f7 #1a1b26
+        active_workspace   #414868 #414868 #c0caf5
+        inactive_workspace #1a1b26 #1a1b26 #545c7e
+        urgent_workspace   #f7768e #f7768e #1a1b26
+    }
+}
+
+# ============================================
+# 窗口规则
+# ============================================
+for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [app_id="mpv"] inhibit_idle visible
+for_window [app_id="neovide"] floating enable
+
+# ============================================
+# 自动启动
+# ============================================
+exec wl-paste --watch cliphist store
+exec mkdir -p ~/Pictures/Screenshots
+
+# 手势支持
+bindgesture swipe:right workspace prev
+bindgesture swipe:left workspace next

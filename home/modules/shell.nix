@@ -1,0 +1,177 @@
+{ config, pkgs, ... }:
+
+{
+
+  programs.tmux = {
+    enable = true;
+    terminal = "tmux-256color";
+    shell = "${pkgs.zsh}/bin/zsh";
+    prefix = "C-a";
+    mouse = true;
+    baseIndex = 1;
+    escapeTime = 0;
+    historyLimit = 50000;
+    keyMode = "vi";
+
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      vim-tmux-navigator
+      # Tokyo Night 需要通过 TPM 安装，见下面的 extraConfig
+    ];
+
+    extraConfig = ''
+      # 终端设置
+      set-option -a terminal-overrides ",*256col*:RGB"
+
+      # 状态栏设置
+      set-option -g status-position bottom
+      set -g display-time 4000
+      set -g status-interval 5
+      set -g status-keys emacs
+      set -g focus-events on
+      setw -g aggressive-resize on
+
+      # 前缀键设置
+      unbind C-b
+      bind C-a send-prefix
+
+      # Tokyo Night 主题配置
+      set -g @tokyo-night-tmux_show_datetime 0
+      set -g @tokyo-night-tmux_window_id_style digital
+      set -g @tokyo-night-tmux_pane_id_style hsquare
+      set -g @tokyo-night-tmux_zoom_id_style dsquare
+      set -g @tokyo-night-tmux_show_music 1
+      set -g @tokyo-night-tmux_show_path 1
+      set -g @tokyo-night-tmux_path_format relative
+      set -g @tokyo-night-tmux_show_battery_widget 1
+      set -g @tokyo-night-tmux_battery_name "BAT1"
+      set -g @tokyo-night-tmux_battery_low_threshold 21
+
+      # 快速切换窗口
+      bind C-p previous-window
+      bind C-n next-window
+
+      # 重新加载配置
+      bind r source-file ~/.config/tmux/tmux.conf \; display-message "Config reloaded!"
+      bind R source-file ~/.config/tmux/tmux.conf
+
+      # 创建新窗口
+      bind -n M-w new-window
+
+      # 分割窗口
+      bind -n M-v split-window -h
+      bind -n M-c split-window -v
+
+      # 切换标签页
+      bind -n M-, previous-window
+      bind -n M-. next-window
+
+      # Alt + 数字键切换窗口
+      bind -n M-1 select-window -t 1
+      bind -n M-2 select-window -t 2
+      bind -n M-3 select-window -t 3
+      bind -n M-4 select-window -t 4
+      bind -n M-5 select-window -t 5
+      bind -n M-6 select-window -t 6
+      bind -n M-7 select-window -t 7
+      bind -n M-8 select-window -t 8
+      bind -n M-9 select-window -t 9
+
+      # 调整窗格大小
+      bind -n M-h resize-pane -L 5
+      bind -n M-k resize-pane -U 5
+      bind -n M-l resize-pane -R 5
+      bind -n M-j resize-pane -D 5
+
+      # 关闭窗格
+      bind -n M-q kill-pane
+
+      # vim-tmux-navigator 支持
+      is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^(.*\s)?(vi|vim|nvim|view|less|nano)(\s.*)?$'"
+      bind -n C-h if-shell "$is_vim" "send-keys C-h" "select-pane -L"
+      bind -n C-j if-shell "$is_vim" "send-keys C-j" "select-pane -D"
+      bind -n C-k if-shell "$is_vim" "send-keys C-k" "select-pane -U"
+      bind -n C-l if-shell "$is_vim" "send-keys C-l" "select-pane -R"
+
+      # TPM 插件（用于 Tokyo Night 主题）
+      set -g @plugin 'tmux-plugins/tpm'
+      set -g @plugin "janoamaral/tokyo-night-tmux"
+
+      # 初始化 TPM（使用可写目录）
+      run '~/.tmux/plugins/tpm/tpm'
+    '';
+  };
+
+  # Zsh 配置 - 修复：删除重复的 enableAutosuggestions 和 syntaxHighlighting
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    initContent = "source ~/.p10k.zsh";
+    plugins = [{
+      name = "powerlevel10k";
+      src = pkgs.zsh-powerlevel10k;
+      file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    }];
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        "sudo"
+        "extract"
+        "colored-man-pages"
+        "command-not-found"
+        "fzf"
+        "history"
+      ];
+    };
+
+    shellAliases = {
+      "ls" = "eza --icons";
+      "la" = "eza -la --icons";
+      "ll" = "eza -l --icons";
+      "cd" = "z";
+      "ff" = "fastfetch";
+      "gaa" = "git add all";
+      ":q" = "exit";
+      edit = "sudo -e";
+      update = "sudo nixos-rebuild switch --flake ~/.dotfiles";
+      n = "nvim";
+      lg = "lazygit";
+    };
+
+    history = {
+      size = 10000;
+      ignoreAllDups = true;
+      path = "$HOME/.zsh_history";
+      ignorePatterns = [ "rm *" "pkill *" "cp *" ];
+    };
+  };
+
+  # 安装 zoxide (z 的现代替代品)
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  # 安装 fzf (模糊搜索神器)
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+  home.packages = with pkgs; [
+    tree
+    fd
+    fzf
+    git
+    lazygit
+    fastfetch
+    zsh-powerlevel10k
+    tmux
+    yazi # 终端备用
+    eza
+    copilot-cli
+  ];
+}
