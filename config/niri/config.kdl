@@ -386,6 +386,19 @@ binds {
     XF86AudioMicMute allow-when-locked=true hotkey-overlay-title="Toggle Mic Mute" {
         spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     }
+    // Media playback controls
+    XF86AudioPlay allow-when-locked=true hotkey-overlay-title="Play/Pause" {
+        spawn-sh "playerctl play-pause"
+    }
+    XF86AudioNext allow-when-locked=true hotkey-overlay-title="Next Track" {
+        spawn-sh "playerctl next"
+    }
+    XF86AudioPrev allow-when-locked=true hotkey-overlay-title="Previous Track" {
+        spawn-sh "playerctl previous"
+    }
+    XF86AudioStop allow-when-locked=true hotkey-overlay-title="Stop Playback" {
+        spawn-sh "playerctl stop"
+    }
     // Brightness controls
     XF86MonBrightnessUp allow-when-locked=true hotkey-overlay-title="Brightness Up" {
         spawn "brightnessctl" "--class=backlight" "set" "+10%"
