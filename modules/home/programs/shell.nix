@@ -69,7 +69,7 @@
     zsh-powerlevel10k
     yazi
     eza
-    copilot-cli
     awscli2
+    zellij
   ];
 }

@@ -12,7 +12,7 @@
     lldb
 
     # Python
-    python3
+    (python3.withPackages (ps: with ps; [ pynvim ]))
     python3Packages.pip
 
     # Node.js
@@ -37,4 +37,9 @@
     # Julia
     julia
   ];
+
+  home.sessionVariables = { NPM_CONFIG_PREFIX = "$HOME/.npm-global"; };
+
+  home.sessionPath = [ "$HOME/.npm-global/bin" ];
+
 }

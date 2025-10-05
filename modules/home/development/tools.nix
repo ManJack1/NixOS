@@ -45,7 +45,12 @@
     evince
     feh
 
+    sqlite
+
+    #xdg-utils
+    xdotool
     # JSON processing
     jq
+
   ];
 }
