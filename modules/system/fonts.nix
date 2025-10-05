@@ -18,6 +18,14 @@
       wqy_microhei
       wqy_zenhei
 
+      # Maple Mono (Ligature TTF unhinted)
+      maple-mono.truetype
+      # Maple Mono NF (Ligature unhinted)
+      maple-mono.NF-unhinted
+      # Maple Mono NF CN (Ligature unhinted)
+      maple-mono.NF-CN-unhinted
+      lxgw-wenkai
+
       # Monospace fonts
       jetbrains-mono
     ];

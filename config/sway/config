@@ -261,6 +261,7 @@ for_window [app_id="neovide"] floating enable
 exec wl-paste --watch cliphist store
 exec mkdir -p ~/Pictures/Screenshots
 
+
 # 手势支持
 bindgesture swipe:right workspace prev
 bindgesture swipe:left workspace next
