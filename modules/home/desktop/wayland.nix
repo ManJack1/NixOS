@@ -22,6 +22,7 @@
     ".config/rofi".source = ../../../config/rofi;
     ".config/niri".source = ../../../config/niri;
     ".p10k.zsh".source = ../../../config/zsh/.p10k.zsh;
+    ".config/starship.toml".source = ../../../config/starship/starship.toml;
   };
 
   home.packages = with pkgs; [
