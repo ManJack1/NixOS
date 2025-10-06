@@ -484,28 +484,28 @@ binds {
         focus-monitor-right
     }
     // Move to monitor
-    Alt+Shift+Left hotkey-overlay-title="Move to Left Monitor" {
+    Mod+Ctrl+Left hotkey-overlay-title="Move to Left Monitor" {
         move-column-to-monitor-left
     }
-    Alt+Shift+Down hotkey-overlay-title="Move to Monitor Below" {
+    Mod+Ctrl+Down hotkey-overlay-title="Move to Monitor Below" {
         move-column-to-monitor-down
     }
-    Alt+Shift+Up hotkey-overlay-title="Move to Monitor Above" {
+    Mod+Ctrl+Up hotkey-overlay-title="Move to Monitor Above" {
         move-column-to-monitor-up
     }
-    Alt+Shift+Right hotkey-overlay-title="Move to Right Monitor" {
+    Mod+Ctrl+Right hotkey-overlay-title="Move to Right Monitor" {
         move-column-to-monitor-right
     }
-    Alt+Shift+H hotkey-overlay-title="Move to Left Monitor" {
+    Mod+Ctrl+H hotkey-overlay-title="Move to Left Monitor" {
         move-column-to-monitor-left
     }
-    Alt+Shift+J hotkey-overlay-title="Move to Monitor Below" {
+    Mod+Ctrl+J hotkey-overlay-title="Move to Monitor Below" {
         move-column-to-monitor-down
     }
-    Alt+Shift+K hotkey-overlay-title="Move to Monitor Above" {
+    Mod+Ctrl+K hotkey-overlay-title="Move to Monitor Above" {
         move-column-to-monitor-up
     }
-    Alt+Shift+L hotkey-overlay-title="Move to Right Monitor" {
+    Mod+Ctrl+L hotkey-overlay-title="Move to Right Monitor" {
         move-column-to-monitor-right
     }
     // Workspace navigation
