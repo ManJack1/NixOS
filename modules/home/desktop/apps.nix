@@ -6,6 +6,7 @@
 
   # System utilities
   home.packages = with pkgs; [
+    spotube
     # Browsers
     google-chrome
 

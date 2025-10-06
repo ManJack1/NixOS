@@ -351,6 +351,9 @@ binds {
     Mod+A hotkey-overlay-title="Open Claude.ai" {
         spawn "firefox" "https://claude.ai"
     }
+    Mod+P hotkey-overlay-title="Open spotify web" {
+        spawn "firefox" "https://spotify.com"
+    }
     Mod+Return hotkey-overlay-title="Open Terminal: kitty" {
         spawn "kitty"
     }
@@ -735,7 +738,7 @@ binds {
     Mod+Shift+P hotkey-overlay-title="Power Off Monitors" {
         power-off-monitors
     }
-    Mod+P {
+    Mod+Z {
         spawn "zathura"
     }
 }

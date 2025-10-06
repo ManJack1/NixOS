@@ -2,6 +2,8 @@
 
 {
   home.packages = with pkgs; [
+
+    spotify-cli-linux
     # Core tools
     vim
     wget
