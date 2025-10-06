@@ -9,7 +9,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    # initContent = "source ~/.p10k.zsh";
+    initContent = "\nbindkey -r '^[c' \n      ";
 
     # plugins = [{
     #   name = "powerlevel10k";
@@ -31,11 +31,18 @@
     };
 
     shellAliases = {
+      cdf =
+        "cd $(fd -tf -H | fzf --preview 'bat --color=always {}' | xargs dirname)";
+      cf =
+        "cd $(fd --type d -H | fzf --preview 'eza -lah --color=always --icons {} 2>/dev/null || ls -lah --color=always {}' --preview-window=right:60%)";
+      vf =
+        "nvim $(fzf --preview 'bat --color=always --style=numbers {}' --preview-window=right:60%)";
+      ff =
+        "fd -t f -H . ~ | fzf --preview 'bat --color=always --style=numbers --line-range :500 {}' --preview-window=right:60% --height=90% --border | xargs realpath | wl-copy";
       ls = "eza --icons";
       la = "eza -la --icons";
       ll = "eza -l --icons";
       cd = "z";
-      ff = "fastfetch";
       gaa = "git add all";
       ":q" = "exit";
       edit = "sudo -e";

@@ -7,6 +7,7 @@
     wget
     curl
     unzip
+    bat
 
     # Search and find
     ripgrep
@@ -19,7 +20,7 @@
 
     # Clipboard support
     wl-clipboard
-    xclip
+    # xclip
 
     # Documentation and diagrams
     tectonic

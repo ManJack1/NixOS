@@ -735,5 +735,8 @@ binds {
     Mod+Shift+P hotkey-overlay-title="Power Off Monitors" {
         power-off-monitors
     }
+    Mod+P {
+        spawn "zathura"
+    }
 }
 
