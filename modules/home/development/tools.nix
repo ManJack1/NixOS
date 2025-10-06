@@ -3,6 +3,9 @@
 {
   home.packages = with pkgs; [
 
+    obsidian
+    typora
+    vscode
     spotify-cli-linux
     # Core tools
     vim
