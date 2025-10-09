@@ -32,7 +32,7 @@
     keyboards = {
       default = {
         ids = [ "*" ];
-        settings = { main = { capslock = "leftcontrol"; }; };
+        settings = { main = { capslock = "f13"; }; };
       };
     };
   };

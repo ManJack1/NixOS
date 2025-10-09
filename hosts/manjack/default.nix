@@ -101,3 +101,4 @@
   # Home Manager
   home-manager.backupFileExtension = "backup";
 }
+

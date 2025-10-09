@@ -12,6 +12,7 @@
         fcitx5-chinese-addons
         fcitx5-configtool
         fcitx5-nord
+        catppuccin-fcitx5
       ];
     };
   };
