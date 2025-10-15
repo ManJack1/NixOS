@@ -52,5 +52,7 @@
 
     # Network tools
     clash-verge-rev
+    flameshot
+    emacs
   ];
 }

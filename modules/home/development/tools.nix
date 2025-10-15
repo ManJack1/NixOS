@@ -13,6 +13,8 @@
     curl
     unzip
     bat
+    gnumake
+    killall
 
     # Search and find
     ripgrep
