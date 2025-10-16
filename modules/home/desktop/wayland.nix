@@ -40,5 +40,31 @@
     # Desktop portals
     xdg-desktop-portal
     xdg-desktop-portal-gnome
+
+    # 首先安装需要的主题包
+    nordic # Nordic 主题包
+    papirus-icon-theme
+    lxappearance
   ];
+  # 这里是用户级配置的命名空间
+  gtk = {
+    enable = true;
+
+    cursorTheme = {
+      name = "Nordic-cursor";
+      package = pkgs.nordic;
+    };
+
+    theme = {
+      name = "Nordic-bluish"; # 主题的确切名称
+      package = pkgs.nordic; # 对应的包
+    };
+
+    iconTheme = {
+      name = "Nordzy-dark";
+      package = pkgs.nordzy-icon-theme;
+    };
+
+  };
+
 }
