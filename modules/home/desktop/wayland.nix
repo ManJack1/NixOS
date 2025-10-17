@@ -29,6 +29,7 @@
     # Wayland core
     wlr-randr
     wl-clipboard
+    xclip
     grim
     slurp
 
