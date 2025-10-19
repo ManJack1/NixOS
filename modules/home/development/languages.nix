@@ -37,6 +37,8 @@
 
     # Julia
     julia
+
+    nil
   ];
 
   home.sessionVariables = { NPM_CONFIG_PREFIX = "$HOME/.npm-global"; };

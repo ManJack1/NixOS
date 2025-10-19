@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
 
   programs.starship = { enable = true; };
@@ -59,6 +58,7 @@
     };
   };
 
+  home.sessionVariables = { PATH = "$HOME/.npm-global/bin:$PATH"; };
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
