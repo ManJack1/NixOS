@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
 
   programs.starship = { enable = true; };
 
@@ -30,6 +29,7 @@
     };
 
     shellAliases = {
+      e = "emacsclient -n";
       cdf =
         "cd $(fd -tf -H | fzf --preview 'bat --color=always {}' | xargs dirname)";
       cf =
