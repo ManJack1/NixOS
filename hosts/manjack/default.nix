@@ -18,7 +18,10 @@
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
   };
 
   # Users
@@ -26,7 +29,10 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "manjack";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # System packages
@@ -40,7 +46,7 @@
 
     (python3.withPackages (ps: with ps; [ pynvim ]))
     # TeX Live full scheme
-    texlive.combined.scheme-full
+    texliveFull
 
     # PDF viewer
     zathura
@@ -98,10 +104,15 @@
   ];
 
   # XDG configuration
-  xdg.mime.defaultApplications = { "inode/directory" = "thunar.desktop"; };
+  xdg.mime.defaultApplications = {
+    "inode/directory" = "thunar.desktop";
+  };
 
   # Nix settings
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # System version
   system.stateVersion = "25.05";

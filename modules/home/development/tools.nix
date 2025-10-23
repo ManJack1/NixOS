@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
 
+    crow-translate
     obsidian
     typora
     vscode
@@ -36,7 +37,7 @@
     mermaid-cli
 
     # Document processing (TeX)
-    texlive.combined.scheme-full
+    texliveFull
     zathura
 
     # Image processing

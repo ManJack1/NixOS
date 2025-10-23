@@ -20,7 +20,8 @@
     nodejs
 
     # Lua
-    luarocks
+    lua5_1
+    luarocks-nix
 
     # Go
     go
