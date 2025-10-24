@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   # Browsers
   programs.firefox.enable = true;
@@ -53,6 +52,6 @@
     # Network tools
     clash-verge-rev
     flameshot
-    emacs
+    emacs-pgtk
   ];
 }

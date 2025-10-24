@@ -13,7 +13,17 @@
     lldb
 
     # Python
-    (python3.withPackages (ps: with ps; [ pynvim ]))
+    (python3.withPackages (ps:
+      with ps; [
+        pynvim
+        epc
+        sexpdata
+        six
+        inflect
+        pyqt6
+        pyqt6-sip
+
+      ]))
     python3Packages.pip
 
     # Node.js

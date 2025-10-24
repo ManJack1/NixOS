@@ -13,6 +13,10 @@
         fcitx5-configtool
         fcitx5-nord
         catppuccin-fcitx5
+        # 添加 Qt 支持
+        kdePackages.fcitx5-qt
+        # 或 qt5
+        libsForQt5.fcitx5-qt
       ];
     };
   };
@@ -24,5 +28,6 @@
     SDL_IM_MODULE = "fcitx";
     GLFW_IM_MODULE = "ibus";
     INPUT_METHOD = "fcitx";
+    FCITX_USE_WAYLAND = "0"; # 可选：强制使用 XWayland
   };
 }
