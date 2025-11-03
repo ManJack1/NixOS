@@ -16,6 +16,9 @@ spawn-at-startup "fcitx5" "-d"
 config-notification {
     disable-failed
 }
+environment {
+    QT_QPA_PLATFORMTHEME "gtk3"
+}
 // 笔记本内屏
 output "eDP-1" {
     off
@@ -743,4 +746,3 @@ binds {
         spawn "zathura"
     }
 }
-

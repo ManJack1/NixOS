@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   # Wayland environment variables
@@ -26,6 +31,8 @@
   };
 
   home.packages = with pkgs; [
+    catppuccin-gtk
+
     # Wayland core
     wlr-randr
     wl-clipboard

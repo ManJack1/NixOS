@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-
+      nwg-look
     crow-translate
     obsidian
     typora

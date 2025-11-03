@@ -5,6 +5,7 @@
     # Rust
     cargo
     rustc
+    kdlfmt
 
     # C/C++
     gcc
@@ -49,7 +50,9 @@
     # Julia
     julia
 
+    #nix
     nil
+    nixpkgs-fmt
   ];
 
   home.sessionVariables = { NPM_CONFIG_PREFIX = "$HOME/.npm-global"; };
