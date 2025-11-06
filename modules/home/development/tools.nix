@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-      nwg-look
+    nwg-look
     crow-translate
     obsidian
     typora
@@ -16,6 +16,7 @@
     bat
     gnumake
     killall
+
 
     # Search and find
     ripgrep
