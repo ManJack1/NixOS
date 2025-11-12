@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     nwg-look
     crow-translate
+    sioyek
     obsidian
     typora
     vscode

@@ -368,6 +368,9 @@ binds {
     Mod+Space hotkey-overlay-title="Application Launcher: rofi" {
         spawn "rofi" "-show" "drun"
     }
+    Mod+Shift+O hotkey-overlay-title="open pdf in sioyek with rofi" {
+        spawn "~/src/sioyek_open.sh"
+    }
     Mod+Tab hotkey-overlay-title="Window Switcher: rofi" {
         spawn "rofi" "-show" "window"
     }
