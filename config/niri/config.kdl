@@ -359,8 +359,8 @@ binds {
     Mod+P hotkey-overlay-title="Open spotify web" {
         spawn "firefox" "-new-window" "https://spotify.com"
     }
-    Mod+Return hotkey-overlay-title="Open Terminal: kitty" {
-        spawn "kitty"
+    Mod+Return hotkey-overlay-title="Open Terminal: ghostty" {
+        spawn "ghostty"
     }
     Mod+B hotkey-overlay-title="Open Browser: Firefox" {
         spawn "firefox"

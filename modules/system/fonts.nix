@@ -7,7 +7,7 @@
       nerd-fonts.iosevka
       noto-fonts-cjk-serif
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       fira-code
       fira-code-symbols

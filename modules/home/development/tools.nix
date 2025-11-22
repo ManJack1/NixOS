@@ -18,7 +18,6 @@
     gnumake
     killall
 
-
     # Search and find
     ripgrep
     fd
@@ -47,7 +46,6 @@
     graphicsmagick
     inkscape
     librsvg
-    poppler_utils
     ffmpeg
     libwebp
     optipng

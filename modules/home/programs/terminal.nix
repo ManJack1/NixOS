@@ -12,10 +12,7 @@
     historyLimit = 50000;
     keyMode = "vi";
 
-    plugins = with pkgs.tmuxPlugins; [
-      sensible
-      vim-tmux-navigator
-    ];
+    plugins = with pkgs.tmuxPlugins; [ sensible vim-tmux-navigator ];
 
     extraConfig = ''
       # Terminal settings
@@ -103,9 +100,5 @@
   programs.kitty.enable = true;
   programs.alacritty.enable = true;
 
-  home.packages = with pkgs; [
-    tmux
-    kitty
-    alacritty
-  ];
+  home.packages = with pkgs; [ tmux ghostty kitty alacritty ];
 }
